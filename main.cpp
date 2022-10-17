@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <exception>
+#include <boost/program_options.hpp>
 
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
@@ -22,6 +23,7 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
+namespace po = boost::program_options;
 
 #include "database/author.h"
 // Logic and data behind the server's behavior.
@@ -36,11 +38,11 @@ class AuthorServiceImpl final : public Author::Service
 
     try
     {
-      database::Author authot = database::Author::read_by_id(request->id());
-      reply->set_first_name("Ivan");
-      reply->set_last_name("Ivanov");
-      reply->set_email("ivanov@yandex.ru");
-      reply->set_title("mr");
+      database::Author author = database::Author::read_by_id(request->id());
+      reply->set_first_name(author.get_first_name());
+      reply->set_last_name(author.get_last_name());
+      reply->set_email(author.get_email());
+      reply->set_title(author.get_title());
       reply->set_id(request->id());
 
       return Status::OK;
@@ -51,8 +53,7 @@ class AuthorServiceImpl final : public Author::Service
       return Status::CANCELLED;
     }
   }
-
-}; 
+};
 
 void RunServer()
 {
@@ -76,8 +77,34 @@ void RunServer()
   server->Wait();
 }
 
-auto main() -> int
+#include "config/config.h"
+auto main(int argc, char *argv[]) -> int
 {
+  po::options_description desc{"Options"};
+  desc.add_options()("help,h", "This screen")
+  ("host,", po::value<std::string>()->required(), "set ip for database")
+  ("port,", po::value<std::string>()->required(), "databaase port")
+  ("login,", po::value<std::string>()->required(), "database login")
+  ("password,", po::value<std::string>()->required(), "database password")
+  ("database,", po::value<std::string>()->required(), "database name");
+
+  po::variables_map vm;
+  po::store(parse_command_line(argc, argv, desc), vm);
+
+  if (vm.count("help"))
+    std::cout << desc << '\n';
+
+  if (vm.count("host"))
+    Config::get().host() = vm["host"].as<std::string>();
+  if (vm.count("port"))
+    Config::get().port() = vm["port"].as<std::string>();
+  if (vm.count("login"))
+    Config::get().login() = vm["login"].as<std::string>();
+  if (vm.count("password"))
+    Config::get().password() = vm["password"].as<std::string>();
+  if (vm.count("database"))
+    Config::get().database() = vm["database"].as<std::string>();
+
   RunServer();
 
   return 0;
