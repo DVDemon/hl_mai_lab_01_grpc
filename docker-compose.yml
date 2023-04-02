@@ -66,6 +66,17 @@ services:
     depends_on:
       mai-db-node-ex01:
         condition: service_healthy 
+  haproxy:
+    image: haproxy
+    volumes:
+      - "./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+    ports:
+      - 3001:3001
+    depends_on:
+      - grpc-server-1
+      - grpc-server-2
+    networks:
+      - arch-network
 
 volumes:
   db-node-ex01-data:
