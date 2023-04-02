@@ -25,37 +25,37 @@
 #ifdef BAZEL_BUILD
 #include "examples/protos/helloworld.grpc.pb.h"
 #else
-#include "author.grpc.pb.h"
+#include "user.grpc.pb.h"
 #endif
 
 using grpc::Channel;
 using grpc::ClientContext;
 using grpc::Status;
-using author::Author;
-using author::AuthorReply;
-using author::AuthorRequest;
+using user::User;
+using user::GetUserReply;
+using user::GetUserRequest;
 
-class AuthorClient {
+class UserClient {
  public:
-  AuthorClient(std::shared_ptr<Channel> channel)
-      : stub_(Author::NewStub(channel)) {}
+  UserClient(std::shared_ptr<Channel> channel)
+      : stub_(User::NewStub(channel)) {}
 
   // Assembles the client's payload, sends it and presents the response back
   // from the server.
-  std::tuple<int,std::string,std::string,std::string,std::string> GetAuthor(const int id) {
+  std::tuple<int,std::string,std::string,std::string,std::string> GetUser(const int id) {
     // Data we are sending to the server.
-    AuthorRequest request;
+    GetUserRequest request;
     request.set_id(id);
 
     // Container for the data we expect from the server.
-    AuthorReply reply;
+    GetUserReply reply;
 
     // Context for the client. It could be used to convey extra information to
     // the server and/or tweak certain RPC behaviors.
     ClientContext context;
 
     // The actual RPC.
-    Status status = stub_->GetAuthor(&context, request, &reply);
+    Status status = stub_->GetUser(&context, request, &reply);
 
     // Act upon its status.
     if (status.ok()) {
@@ -68,12 +68,12 @@ class AuthorClient {
   }
 
  private:
-  std::unique_ptr<Author::Stub> stub_;
+  std::unique_ptr<User::Stub> stub_;
 };
 
 int main(int argc, char** argv) {
   
-  AuthorClient greeter(
+  UserClient greeter(
       grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
   
   int id{1};
@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
   if(argc>1) {
     id = atoi(argv[1]);
   }
-  std::tuple<int,std::string,std::string,std::string,std::string> reply = greeter.GetAuthor(id);
+  std::tuple<int,std::string,std::string,std::string,std::string> reply = greeter.GetUser(id);
   std::cout << "id: " << std::get<0>(reply) << std::endl;
   std::cout << "first_name: " << std::get<1>(reply) << std::endl;
   std::cout << "last_name: " << std::get<2>(reply) << std::endl;
