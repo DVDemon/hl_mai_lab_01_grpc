@@ -65,6 +65,8 @@ class UserServiceImpl final : public User::Service
         reply->set_email(user->get_email());
         reply->set_title(user->get_title());
         reply->set_id(request->id());
+        reply->set_login(user->get_login());
+        reply->set_password(user->get_password());
 
         return Status::OK;
       }
