@@ -3,6 +3,6 @@ export DB_PORT=3360
 export DB_LOGIN=stud
 export DB_PASSWORD=stud
 export DB_DATABASE=archdb
-
+export SERVER_NAME=server_1
 ./build/server
 

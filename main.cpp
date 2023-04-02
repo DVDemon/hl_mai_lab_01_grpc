@@ -19,13 +19,15 @@ using user::User;
 
 #include "database/user.h"
 
+std::string server_name{"no_name"};
+
 class UserServiceImpl final : public User::Service
 {
   Status SetUser([[maybe_unused]] ServerContext *context,
                  const user::SetUserRequest *request,
                  user::SetUserReply *reply) override
   {
-    std::cout << "set request login:" << request->login() << std::endl;
+    std::cout << server_name <<": set request login:" << request->login() << std::endl;
     try
     {
       database::User usr;
@@ -51,7 +53,7 @@ class UserServiceImpl final : public User::Service
                  user::GetUserReply *reply) override
   {
 
-    std::cout << "get request id:" << request->id() << std::endl;
+    std::cout << server_name <<": get request id:" << request->id() << std::endl;
 
     try
     {
@@ -79,6 +81,7 @@ class UserServiceImpl final : public User::Service
 
 void RunServer()
 {
+  if(std::getenv("SERVER_NAME")) server_name = std::getenv("SERVER_NAME");
 
   database::User::init();
   std::string server_address("0.0.0.0:50051");

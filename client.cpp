@@ -40,26 +40,24 @@ class UserClient {
   UserClient(std::shared_ptr<Channel> channel)
       : stub_(User::NewStub(channel)) {}
 
-  // Assembles the client's payload, sends it and presents the response back
-  // from the server.
-  std::tuple<int,std::string,std::string,std::string,std::string> GetUser(const int id) {
-    // Data we are sending to the server.
+  void GetUser(const int id) {
     GetUserRequest request;
     request.set_id(id);
 
-    // Container for the data we expect from the server.
-    GetUserReply reply;
 
-    // Context for the client. It could be used to convey extra information to
-    // the server and/or tweak certain RPC behaviors.
+    GetUserReply reply;
     ClientContext context;
 
-    // The actual RPC.
     Status status = stub_->GetUser(&context, request, &reply);
 
-    // Act upon its status.
     if (status.ok()) {
-      return std::tuple<int,std::string,std::string,std::string,std::string>(reply.id(),reply.first_name(),reply.last_name(),reply.email(),reply.title());     
+      std::cout << "id:" << reply.id() << std::endl;
+      std::cout << "first_name:" << reply.first_name() << std::endl;
+      std::cout << "last_name:" << reply.last_name() << std::endl;
+      std::cout << "email:" << reply.email() << std::endl;
+      std::cout << "title:" << reply.title() << std::endl;
+      std::cout << "login:" << reply.login() << std::endl;
+      std::cout << "password:" <<reply.password() << std::endl;
     } else {
       std::cout << status.error_code() << ": " << status.error_message()
                 << std::endl;
@@ -73,7 +71,7 @@ class UserClient {
 
 int main(int argc, char** argv) {
   
-  UserClient greeter(
+  UserClient user_stub(
       grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
   
   int id{1};
@@ -81,13 +79,8 @@ int main(int argc, char** argv) {
   if(argc>1) {
     id = atoi(argv[1]);
   }
-  std::tuple<int,std::string,std::string,std::string,std::string> reply = greeter.GetUser(id);
-  std::cout << "id: " << std::get<0>(reply) << std::endl;
-  std::cout << "first_name: " << std::get<1>(reply) << std::endl;
-  std::cout << "last_name: " << std::get<2>(reply) << std::endl;
-  std::cout << "email: " << std::get<3>(reply) << std::endl;
-  std::cout << "title: " << std::get<4>(reply) << std::endl;
-
+  
+  user_stub.GetUser(id);
 
   return 0;
 }

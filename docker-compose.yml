@@ -27,35 +27,45 @@ services:
     volumes:
       - db-node-ex01-data:/var/lib/mysql
 
-  # my_service:
-  #   build:
-  #     context: my_service
-  #     dockerfile: Dockerfile
-  #   container_name: my_service
-  #   environment:
-  #     - DB_HOST=mai-db-node-ex01
-  #     - DB_PORT=3306
-  #     - DB_LOGIN=stud
-  #     - DB_PASSWORD=stud
-  #     - DB_DATABASE=archdb
-  #   ports:
-  #     - 8080:8080
-  #   networks:
-  #     - arch-network
-  #   depends_on:
-  #     mai-db-node-ex01:
-  #       condition: service_healthy
-  # other_server:
-  #   build:
-  #     context: other_server
-  #     dockerfile: Dockerfile
-  #   container_name: other_server
-  #   environment:
-  #     - SERVICE_HOST=my_service
-  #   ports:
-  #     - 8081:8081
-  #   networks:
-  #     - arch-network
+  grpc-server-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grpc-server-1
+    environment:
+      - DB_HOST=mai-db-node-ex01
+      - DB_PORT=3306
+      - DB_LOGIN=stud
+      - DB_PASSWORD=stud
+      - DB_DATABASE=archdb
+      - SERVER_NAME=grpc-server-1
+    ports:
+      - 50051:50051
+    networks:
+      - arch-network
+    depends_on:
+      mai-db-node-ex01:
+        condition: service_healthy
+
+  grpc-server-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grpc-server-2
+    environment:
+      - DB_HOST=mai-db-node-ex01
+      - DB_PORT=3306
+      - DB_LOGIN=stud
+      - DB_PASSWORD=stud
+      - DB_DATABASE=archdb
+      - SERVER_NAME=grpc-server-2
+    ports:
+      - 50052:50051
+    networks:
+      - arch-network
+    depends_on:
+      mai-db-node-ex01:
+        condition: service_healthy 
 
 volumes:
   db-node-ex01-data:
