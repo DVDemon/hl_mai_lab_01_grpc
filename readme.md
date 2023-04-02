@@ -2,26 +2,14 @@
 
 ### Устанавливаем среду для работы с GRPC
 
-git clone
---recurse-submodules -b v1.43.0 https://github.com/grpc/grpc
-
+git clone --recurse-submodules -b v1.43.0 https://github.com/grpc/grpc
 cd grpc
-
-mkdir -p
-cmake/build
-
-pushd
-cmake/build
-
-cmake
--DgRPC_INSTALL=ON  -DgRPC_BUILD_TESTS=OFF
-../..
-
-make -j
-
+mkdir -p cmake/build
+pushd cmake/build
+cmake -DgRPC_INSTALL=ON  -DgRPC_BUILD_TESTS=OFF ../..
+make 
 sudo make
 install
-
 popd
 
 ### Tutorial
