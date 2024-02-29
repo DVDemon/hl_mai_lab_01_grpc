@@ -2,7 +2,7 @@ repo_name: DVDemon/hl_mai_lab_01_grpc
 report_id: a042bb8e99318ee8b26b9a4f75d1d9e5
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T08:57:48+00:00'
+timestamp: '2024-02-29T18:31:17+00:00'
 requested_by: DVDemon
 provider: github
 branch: master
@@ -20,7 +20,7 @@ tools:
   detection_source_url: https://github.com/DVDemon/hl_mai_lab_01_grpc
   detection_source: Repo Metadata
 - name: CMake
-  description: 'An open-source system that manages the build process '
+  description: An open-source system that manages the build process
   website_url: http://www.cmake.org/
   open_source: false
   hosted_saas: false
