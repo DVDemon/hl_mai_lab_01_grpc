@@ -4,11 +4,11 @@
 DVDemon/hl_mai_lab_01_grpc is built on the following main stack:
 
 - [C++](http://www.cplusplus.com/) – Languages
-- [HAProxy](http://www.haproxy.org/) – Load Balancer / Reverse Proxy
 - [CMake](http://www.cmake.org/) – Java Build Tools
-- [Ubuntu](http://www.ubuntu.com/) – Operating Systems
-- [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
 - [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
+- [HAProxy](http://www.haproxy.org/) – Load Balancer / Reverse Proxy
+- [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- [Ubuntu](http://www.ubuntu.com/) – Operating Systems
 
 Full tech stack [here](/techstack.md)
 
@@ -19,11 +19,11 @@ Full tech stack [here](/techstack.md)
 DVDemon/hl_mai_lab_01_grpc is built on the following main stack:
 
 - <img width='25' height='25' src='https://img.stackshare.io/service/1049/cplusplus.png' alt='C++'/> [C++](http://www.cplusplus.com/) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1179/preview.png' alt='HAProxy'/> [HAProxy](http://www.haproxy.org/) – Load Balancer / Reverse Proxy
 - <img width='25' height='25' src='https://img.stackshare.io/service/2424/0UlUI_y1_400x400.jpg' alt='CMake'/> [CMake](http://www.cmake.org/) – Java Build Tools
-- <img width='25' height='25' src='https://img.stackshare.io/service/3511/cof_orange_hex.jpg' alt='Ubuntu'/> [Ubuntu](http://www.ubuntu.com/) – Operating Systems
-- <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
 - <img width='25' height='25' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'/> [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
+- <img width='25' height='25' src='https://img.stackshare.io/service/1179/preview.png' alt='HAProxy'/> [HAProxy](http://www.haproxy.org/) – Load Balancer / Reverse Proxy
+- <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- <img width='25' height='25' src='https://img.stackshare.io/service/3511/cof_orange_hex.jpg' alt='Ubuntu'/> [Ubuntu](http://www.ubuntu.com/) – Operating Systems
 
 Full tech stack [here](/techstack.md)
 
@@ -34,7 +34,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [DVDemon/hl_mai_lab_01_grpc](https://github.com/DVDemon/hl_mai_lab_01_grpc)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|7<br/>Tools used|01/05/24 <br/>Report generated|
+|7<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
